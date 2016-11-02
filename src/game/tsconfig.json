@@ -1,6 +1,7 @@
 {
+	"compileOnSave" : true,
     "compilerOptions": {
-    	"outDir": "../../build/",
+    	"outDir": "../../build/public",
         "module": "commonjs",
         "target": "es5",
         "removeComments": true,
