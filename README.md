@@ -1,3 +1,4 @@
 # Colonisation 
 ### References 
-[Link to our backlog](https://tree.taiga.io/project/rutenium-colonisation/backlog)
+
+<a href="https://tree.taiga.io/project/rutenium-colonisation/backlog" target="_blank">Link to our backlog</a
