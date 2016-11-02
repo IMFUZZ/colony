@@ -6,4 +6,16 @@
 <p> Colony is mainly coded in Typescript. All the JS coding we do is in typescript, the Node server, the front end, everything JS related is coded using Typescript. We use <a href="http://www.pixijs.com/"> PixiJS </a> to do the rendering of visuals in the browser. That's pretty much it, the engine is all coded in JS, the main goal of this project was to familiarize ourselves with Typescript :)</p>
 
 <h2> What have you got in store for the next updates? </h2>
-<p> We have alot of cool ideas and new feature we want to add and you might just wonder what we are working on or what we have in mind for the future. Where could you find such a thing you ask? I say you, just go check our <a href="https://tree.taiga.io/project/rutenium-colonisation/backlog" target="_blank">backlog</a>! We got everything covered there as to what we're working on right now and what we have in store for future updates!
+<p> We have alot of cool ideas and new feature we want to add and you might just wonder what we are working on or what we have in mind for the future. Where could you find such a thing you ask? I say you, just go check our <a href="https://tree.taiga.io/project/rutenium-colonisation/backlog" target="_blank">backlog</a>! We got everything covered there as to what we're working on right now and what we have in store for future updates!</p>
+
+<h2> How to (Build and run) :  </h2>
+<p> 
+  #0 : Install : 
+    - Node.js w/ npm (<a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>)
+    - (Using npm) install the "typescript" module globally (npm install typescript -g)
+  #1 : Install dependencies by launching "npm install" in the root directory of the project
+  #2 : Build the server by launching "tsc -p src/server" in the root directory of the project
+  #3 : Build the game by launching "tsc -p src/game" in the root directory of the project
+  #4 : Launch the server by launching "npm start" in the root directory of the project
+  #5 : Using your favorite browser (Google Chrome of course), go to "localhost:3000/"
+</p>
