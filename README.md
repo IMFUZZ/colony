@@ -1,3 +1,3 @@
 # Colonisation 
 ### References 
-[Link to our Backlog](https://tree.taiga.io/project/rutenium-colonisation/backlog)
+[Link to our backlog](https://tree.taiga.io/project/rutenium-colonisation/backlog)
