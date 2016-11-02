@@ -1,0 +1,25 @@
+{
+  "name": "colony",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node ./build/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IMFUZZ/colony.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IMFUZZ/colony/issues"
+  },
+  "homepage": "https://github.com/IMFUZZ/colony#readme",
+  "dependencies": {
+    "@types/express": "^4.0.33",
+    "@types/node": "^6.0.46",
+    "express": "^4.14.0"
+  }
+}
