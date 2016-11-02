@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
-    	"outDir": "./build/",
+    	"outDir": "../../build/",
         "module": "commonjs",
         "target": "es5",
+        "removeComments": true,
         "noImplicitAny": false,
         "sourceMap": false
     }
