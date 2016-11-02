@@ -10,12 +10,20 @@
 
 <h2> How to (Build and run) :  </h2>
 <p> 
-  #0 : Install : 
+  <ol>
+  <li> : Install : 
     - Node.js w/ npm (<a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>)
     - (Using npm) install the "typescript" module globally (npm install typescript -g)
-  #1 : Install dependencies by launching "npm install" in the root directory of the project
-  #2 : Build the server by launching "tsc -p src/server" in the root directory of the project
-  #3 : Build the game by launching "tsc -p src/game" in the root directory of the project
-  #4 : Launch the server by launching "npm start" in the root directory of the project
-  #5 : Using your favorite browser (Google Chrome of course), go to "localhost:3000/"
+  </li>
+  <li> : Install dependencies by launching "npm install" in the root directory of the project
+  </li>
+  <li> : Build the server by launching "tsc -p src/server" in the root directory of the project
+  </li>
+  <li> : Build the game by launching "tsc -p src/game" in the root directory of the project
+  </li>
+  <li> : Launch the server by launching "npm start" in the root directory of the project
+  </li>
+  <li> : Using your favorite browser (Google Chrome of course), go to "localhost:3000/"
+  </li>
+  </ol>
 </p>
