@@ -11,9 +11,11 @@
 <h2> How to (Build and run) :  </h2>
 <p> 
   <ol>
-  <li> : Install : 
-    - Node.js w/ npm (<a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>)
-    - (Using npm) install the "typescript" module globally (npm install typescript -g)
+  <li> : Install :
+    <ol>
+      <li>Node.js w/ npm (<a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>)</li>
+      <li>(Using npm) install the "typescript" module globally (npm install typescript -g)</li>
+     </ol>
   </li>
   <li> : Install dependencies by launching "npm install" in the root directory of the project
   </li>
