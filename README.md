@@ -1,4 +1,4 @@
-<h1> C010ny </h1>
+<h1> C01ony </h1>
 <p> Hey there! Yes, you! Welcome to the repository of our super cool project! It might look empty for now, but you just wait, we have alot of feature we want to add into the game, so stay alert! :) </p>
 <h2> What is Colony? </h2>
 <p> Colony is a resource management game based on games like <a href="http://store.steampowered.com/app/246620">Plague Inc Evolved</a>. Our first idea was a game just like it, but we changed to concept to colonize cities and take over country instead of being a Plague. And thus Colony was born. I'd say the best way to know how the game works is to just try it!</p>
