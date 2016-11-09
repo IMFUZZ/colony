@@ -1,7 +1,8 @@
 {
 	"compileOnSave" : true,
     "compilerOptions": {
-    	"outDir": "../../build/public",
+    	/*"outDir": "../../build/public",*/
+        "outFile": "../../build/public/game.js",
         "module": "commonjs",
         "target": "es5",
         "removeComments": true,
