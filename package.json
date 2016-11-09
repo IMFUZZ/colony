@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "node ./build/main.js",
+    "build": "tsc -p src/game -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +21,8 @@
   "dependencies": {
     "@types/express": "^4.0.33",
     "@types/node": "^6.0.46",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "pixi-typescript": "^4.0.0",
+    "typescript": "^2.0.8"
   }
 }
