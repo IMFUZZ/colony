@@ -1,5 +1,3 @@
-
-
 var colors;
 var interactionManager;
 var renderer;
@@ -20,20 +18,18 @@ function setup() {
 
 	//Add the canvas to the HTML document
 	document.body.appendChild(renderer.view);
-	renderer.backgroundColor = colors.a;
+	renderer.backgroundColor = 0xe0e0e0;
 };
 
 var graph = new Graph([
 	new NodeEntity(100, 100),
-	new NodeEntity(200, 100),
-	new NodeEntity(300, 100),
-	new NodeEntity(100, 200),
-	new NodeEntity(200, 200),
-	new NodeEntity(300, 200),
-	new NodeEntity(100, 300),
-	new NodeEntity(200, 300),
-	new NodeEntity(300, 300)
+	new NodeEntity(400,400),
+	new NodeEntity(250,500)
 ]);
+
+graph.createTwoWayLink(graph.nodes[0], graph.nodes[1]);
+graph.createTwoWayLink(graph.nodes[1], graph.nodes[2]);
+graph.createTwoWayLink(graph.nodes[0], graph.nodes[2]);
 /*// Text example
 var text = new PIXI.Text(
 	'This is a pixi text',
@@ -66,7 +62,7 @@ stage.addChild(rectangle);
 */
 function update() {
 	console.log("updating..");
-	renderer.render(graph.container);
+	graph.render(renderer);
 	requestAnimationFrame(update);
 }
 setup();

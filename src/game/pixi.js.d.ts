@@ -312,6 +312,7 @@ declare module PIXI {
         protected _mask: Rectangle;
         x: number;
         y: number;
+        zIndex: number;
         worldTransform: Matrix;
         localTransform: Matrix;
         position: Point;
@@ -462,7 +463,6 @@ declare module PIXI {
 
     }
     export class Graphics extends Container {
-
         fillAlpha: number;
         lineWidth: number;
         lineColor: number;

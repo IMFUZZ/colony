@@ -9,17 +9,22 @@ class Link extends Drawable {
 		shape.x = 0;
 		shape.y = 0;
 
-		shape.moveTo(a_nodeA.graphic.x, a_nodeA.graphic.y);
+		Utils.drawLine(shape, a_nodeA.graphic.x, a_nodeA.graphic.y,a_nodeB.graphic.x, a_nodeB.graphic.y, 4, 0x000000);
+		Utils.drawLine(shape, a_nodeA.graphic.x, a_nodeA.graphic.y,a_nodeB.graphic.x, a_nodeB.graphic.y, 2, 0xffffff);
 
-		shape.lineStyle(2, 0xff0000, 1);
-		
-		shape.beginFill(0xff0000);
-		shape.lineTo(a_nodeB.graphic.x, a_nodeB.graphic.y);
-		shape.endFill();
-		
+		shape.zIndex = 1;
 		shape.interactive = false;
 		super(shape);
 		this.nodeA = a_nodeA;
 		this.nodeB = a_nodeB;
+	}
+
+	private drawLine(shape : PIXI.Graphics, a_x : number, a_y: number, a_x2 : number, a_y2 : number, width: number, color: number)
+	{
+		shape.moveTo(a_x, a_y);
+		shape.lineStyle(width, color);
+		shape.beginFill(color);
+		shape.lineTo(a_x2, a_y2);
+		shape.endFill();
 	}
 }

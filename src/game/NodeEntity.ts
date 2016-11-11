@@ -7,10 +7,14 @@ class NodeEntity extends Drawable {
 		var shape = new PIXI.Graphics();
 		shape.x = a_x;
 		shape.y = a_y;
-		shape.beginFill(0xff0000); // CHANGE THIS
-		shape.drawCircle(0, 0, 10);
+		shape.beginFill(0x00000);
+		shape.drawCircle(0,0,15);
+		shape.endFill();
+		shape.beginFill(0x487fd6); // CHANGE THIS
+		shape.drawCircle(0, 0, 13);
 		shape.endFill();
 		shape.interactive = true;
+		shape.zIndex = 2;
 		super(shape);
 		this.links = [];
 	}
