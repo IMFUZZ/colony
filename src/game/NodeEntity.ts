@@ -2,7 +2,8 @@
 
 class NodeEntity extends Drawable {
 	links: Link[];
-	
+	resources: Resource[];
+
 	constructor(a_x:number, a_y:number) {
 		var shape = new PIXI.Graphics();
 		shape.x = a_x;
@@ -17,9 +18,15 @@ class NodeEntity extends Drawable {
 		shape.zIndex = 2;
 		super(shape);
 		this.links = [];
+		this.resources = [];
 	}
 
 	addLink(a_link:Link) {
 		this.links.push(a_link);
+	}
+
+	addResource(a_resource: Resource)
+	{
+		this.resources.push(a_resource);
 	}
 }
