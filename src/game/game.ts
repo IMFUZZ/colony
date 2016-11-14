@@ -1,8 +1,8 @@
 
-
 var colors;
 var interactionManager;
 var renderer;
+
 function setup() {
 	colors = {
 		"a" : 0x2A363B,
