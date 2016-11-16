@@ -3,8 +3,19 @@ class Resource
     // The interval time between each update
     private updateInterval: number
     private interval : NodeJS.Timer
-    constructor(public name:string, public amount: number, public growthRatio: number, public staticIncrease: number)
+    private text : PIXI.Text
+    constructor(public name:string, public amount: number, public growthRatio: number, public staticIncrease: number, x? : number, y? : number)
     {
+        this.text = new PIXI.Text(amount.toString(),{
+            fontFamily : 'Arial', 
+            fontWeight : 'Bold',
+            fontSize: 12, 
+            fill : 0x000000, 
+            align : 'center',
+        });
+        this.text.x = x || 0;
+        this.text.y = y || 0;
+        this.text.zIndex = 15;
         this.updateInterval = 500;
     }
 
@@ -14,12 +25,17 @@ class Resource
         // Exemple of how to stop the interval
         // clearInterval(this.interval);
     }
-    private update(self){
+    private update(self : Resource){
         return function()
         {
             self.amount += self.growthRatio * self.amount;
             self.amount += self.staticIncrease;
-            console.log(self.amount);
+            self.text.text = Math.round(self.amount).toString();
         }
+    }
+
+    registerGraphics(container: PIXI.Container)
+    {
+        container.addChild(this.text);
     }
 }

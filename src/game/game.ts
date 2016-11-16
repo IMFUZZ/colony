@@ -22,11 +22,10 @@ function setup() {
 };
 
 var graph = new Graph([
-	new NodeEntity(100, 100),
-	new NodeEntity(400,400),
+	new NodeEntity(100, 100, [new Resource("Population", 11000,-0.01, 100, 80,70)]),
+	new NodeEntity(400,400, [new Resource("Population", 11000,-1, 100, 380,370)]),
 	new NodeEntity(250,500)
 ]);
-
 graph.createTwoWayLink(graph.nodes[0], graph.nodes[1]);
 graph.createTwoWayLink(graph.nodes[1], graph.nodes[2]);
 graph.createTwoWayLink(graph.nodes[0], graph.nodes[2]);
@@ -61,7 +60,7 @@ rectangle.y = 170;
 stage.addChild(rectangle);
 */
 function update() {
-	console.log("updating..");
+	// console.log("updating..");
 	graph.render(renderer);
 	requestAnimationFrame(update);
 }
