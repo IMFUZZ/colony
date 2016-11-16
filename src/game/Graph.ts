@@ -1,6 +1,6 @@
 
 class Graph {
-	private container:PIXI.Container;
+	container:PIXI.Container;
 	nodes:NodeEntity[];
 	constructor(a_nodes: NodeEntity[]) {
 		this.container = new PIXI.Container();

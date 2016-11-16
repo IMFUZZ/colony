@@ -19,12 +19,12 @@ class NodeEntity extends Drawable {
 		this.links = [];
 
 		shape.on("mousedown", (e) => {
-			interactionManager.mouse.clickedNode = this;
-			console.log("MOUSEDOWN!");
+			interactionManager.mouse.link.nodeA = this;
 		});
 
 		shape.on("mouseup", (e) => {
-			console.log(interactionManager.mouse.clickedNode);
+			interactionManager.mouse.link.nodeB = this;
+			interactionManager.mouse.link.reset();
 		});
 	}
 

@@ -1,30 +1,62 @@
 ///<reference path="Drawable.ts"/>
 
 class Link extends Drawable {
-	// TRUMP SUCKS
 	nodeA:NodeEntity;
 	nodeB:NodeEntity;
 	constructor(a_nodeA: NodeEntity, a_nodeB: NodeEntity) {
 		var shape = new PIXI.Graphics();
 		shape.x = 0;
 		shape.y = 0;
-
-		Utils.drawLine(shape, a_nodeA.graphic.x, a_nodeA.graphic.y,a_nodeB.graphic.x, a_nodeB.graphic.y, 4, 0x000000);
-		Utils.drawLine(shape, a_nodeA.graphic.x, a_nodeA.graphic.y,a_nodeB.graphic.x, a_nodeB.graphic.y, 2, 0xffffff);
-
 		shape.zIndex = 1;
 		shape.interactive = false;
 		super(shape);
-		this.nodeA = a_nodeA;
-		this.nodeB = a_nodeB;
+		if (a_nodeA) {
+			this.nodeA = a_nodeA;	
+			Utils.drawLine(
+				shape, 
+				a_nodeA.graphic.x, 
+				a_nodeA.graphic.y,
+				a_nodeB.graphic.x, 
+				a_nodeB.graphic.y, 
+				4, 
+				0x000000
+			);
+		}
+		if (a_nodeB) {
+			this.nodeB = a_nodeB;	
+			Utils.drawLine(
+				shape, 
+				a_nodeA.graphic.x, 
+				a_nodeA.graphic.y,
+				a_nodeB.graphic.x, 
+				a_nodeB.graphic.y, 
+				2,
+				0xffffff
+			);
+		}		
 	}
 
-	private drawLine(shape : PIXI.Graphics, a_x : number, a_y: number, a_x2 : number, a_y2 : number, width: number, color: number)
-	{
-		shape.moveTo(a_x, a_y);
-		shape.lineStyle(width, color);
-		shape.beginFill(color);
-		shape.lineTo(a_x2, a_y2);
-		shape.endFill();
+	public redraw(x1, y1, x2, y2, zIndex) {
+		this.graphic.clear();
+		this.graphic.zIndex = zIndex;
+		x1 = (this.nodeA) ? this.nodeA.graphic.x : x1;
+		y1 = (this.nodeA) ? this.nodeA.graphic.y : y1;
+		x2 = (this.nodeB) ? this.nodeB.graphic.x : x2;
+		y2 = (this.nodeB) ? this.nodeB.graphic.y : y2;
+		console.log(x2);
+		Utils.drawLine(
+			this.graphic, 
+			x1, 
+			y1,
+			x2, 
+			y2, 
+			4, 
+			0x000000
+		);
+	}
+
+	public reset() {
+		this.nodeA = null;
+		this.nodeB = null;
 	}
 }

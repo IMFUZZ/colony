@@ -34,6 +34,7 @@ var graph = new Graph([
 graph.createTwoWayLink(graph.nodes[0], graph.nodes[1]);
 graph.createTwoWayLink(graph.nodes[1], graph.nodes[2]);
 graph.createTwoWayLink(graph.nodes[0], graph.nodes[2]);
+
 /*// Text example
 var text = new PIXI.Text(
 	'This is a pixi text',
@@ -65,8 +66,11 @@ rectangle.y = 170;
 stage.addChild(rectangle);
 */
 function update() {
+	var mousePos = interactionManager.mouse.global;
+	interactionManager.mouse.link.redraw(mousePos.x, mousePos.y, mousePos.x, mousePos.y, 5);
 	graph.render(renderer);
 	requestAnimationFrame(update);
 }
 setup();
+graph.container.addChild(interactionManager.mouse.link.graphic);
 update();

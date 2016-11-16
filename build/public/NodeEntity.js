@@ -21,11 +21,11 @@ var NodeEntity = (function (_super) {
         _super.call(this, shape);
         this.links = [];
         shape.on("mousedown", function (e) {
-            interactionManager.mouse.clickedNode = _this;
-            console.log("MOUSEDOWN!");
+            interactionManager.mouse.link.nodeA = _this;
         });
         shape.on("mouseup", function (e) {
-            console.log(interactionManager.mouse.clickedNode);
+            interactionManager.mouse.link.nodeB = _this;
+            interactionManager.mouse.link.reset();
         });
     }
     NodeEntity.prototype.addLink = function (a_link) {
