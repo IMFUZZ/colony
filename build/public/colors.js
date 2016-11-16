@@ -1,0 +1,23 @@
+var Colors;
+(function (Colors) {
+    Colors[Colors["grass"] = 1211401] = "grass";
+    Colors[Colors["water"] = 836821] = "water";
+    Colors[Colors["land"] = 7417094] = "land";
+    Colors[Colors["sand"] = 14005004] = "sand";
+    Colors[Colors["ice"] = 12574947] = "ice";
+    Colors[Colors["grassNode"] = 22015] = "grassNode";
+    Colors[Colors["waterNode"] = 16777215] = "waterNode";
+    Colors[Colors["landNode"] = 1211401] = "landNode";
+    Colors[Colors["sandNode"] = 12058624] = "sandNode";
+    Colors[Colors["iceNode"] = 0] = "iceNode";
+    Colors[Colors["grassInnerPath"] = 7417094] = "grassInnerPath";
+    Colors[Colors["waterInnerPath"] = 1604] = "waterInnerPath";
+    Colors[Colors["landInnerPath"] = 8750469] = "landInnerPath";
+    Colors[Colors["sandInnerPath"] = 16514043] = "sandInnerPath";
+    Colors[Colors["iceInnerPath"] = 1211401] = "iceInnerPath";
+    Colors[Colors["grassOuterPath"] = 1116416] = "grassOuterPath";
+    Colors[Colors["waterOuterPath"] = 1604] = "waterOuterPath";
+    Colors[Colors["landOuterPath"] = 0] = "landOuterPath";
+    Colors[Colors["sandOuterPath"] = 0] = "sandOuterPath";
+    Colors[Colors["iceOuterPath"] = 16777215] = "iceOuterPath";
+})(Colors || (Colors = {}));

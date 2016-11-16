@@ -9,7 +9,7 @@ var Graph = (function () {
     }
     Graph.prototype.addNode = function (a_node) {
         this.nodes.push(a_node);
-        this.container.addChild(a_node.graphic);
+        a_node.registerGraphics(this.container);
         Utils.updateLayersOrder(this.container);
     };
     Graph.prototype.createOneWayLink = function (a_nodeA, a_nodeB) {

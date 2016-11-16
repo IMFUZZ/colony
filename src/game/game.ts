@@ -2,13 +2,13 @@ var colors;
 var interactionManager;
 var renderer;
 function setup() {
-	colors = {
+	/*colors = {
 		"a" : 0x2A363B,
 		"b" : 0xE84A5F,
 		"c" : 0xFF847C,
 		"d" : 0xFECEA8,
 		"e" : 0x99B898
-	};
+	};*/
 	renderer = PIXI.autoDetectRenderer(
 		800, 600, {
 		"antialias" : true,
@@ -18,7 +18,7 @@ function setup() {
 
 	//Add the canvas to the HTML document
 	document.body.appendChild(renderer.view);
-	renderer.backgroundColor = 0xe0e0e0;
+	renderer.backgroundColor = Colors.grass;
 };
 
 var graph = new Graph([
@@ -34,8 +34,8 @@ var text = new PIXI.Text(
 	'This is a pixi text',
 	{
 		fontFamily : 'Lucida Sans Unicode',
-		fontSize: 12, 
-		fill : colors.b, 
+		fontSize: 12,
+		fill : colors.b,
 		align : 'center'
 	}
 );

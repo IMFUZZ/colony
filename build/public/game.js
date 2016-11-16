@@ -2,32 +2,24 @@ var colors;
 var interactionManager;
 var renderer;
 function setup() {
-    colors = {
-        "a": 0x2A363B,
-        "b": 0xE84A5F,
-        "c": 0xFF847C,
-        "d": 0xFECEA8,
-        "e": 0x99B898
-    };
     renderer = PIXI.autoDetectRenderer(800, 600, {
         "antialias": true,
         "autoResize": true
     });
     interactionManager = new PIXI.interaction.InteractionManager(renderer);
     document.body.appendChild(renderer.view);
-    renderer.backgroundColor = 0xe0e0e0;
+    renderer.backgroundColor = Colors.grass;
 }
 ;
 var graph = new Graph([
-    new NodeEntity(100, 100),
-    new NodeEntity(400, 400),
+    new NodeEntity(100, 100, [new Resource("Population", 11000, -0.01, 100, 80, 70)]),
+    new NodeEntity(400, 400, [new Resource("Population", 11000, -1, 100, 380, 370)]),
     new NodeEntity(250, 500)
 ]);
 graph.createTwoWayLink(graph.nodes[0], graph.nodes[1]);
 graph.createTwoWayLink(graph.nodes[1], graph.nodes[2]);
 graph.createTwoWayLink(graph.nodes[0], graph.nodes[2]);
 function update() {
-    console.log("updating..");
     graph.render(renderer);
     requestAnimationFrame(update);
 }

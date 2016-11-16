@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var NodeEntity = (function (_super) {
     __extends(NodeEntity, _super);
-    function NodeEntity(a_x, a_y) {
+    function NodeEntity(a_x, a_y, resources) {
         var shape = new PIXI.Graphics();
         shape.x = a_x;
         shape.y = a_y;
@@ -19,9 +19,19 @@ var NodeEntity = (function (_super) {
         shape.zIndex = 2;
         _super.call(this, shape);
         this.links = [];
+        this.resources = resources || [];
+        this.resources.forEach(function (element) {
+            element.start();
+        });
     }
     NodeEntity.prototype.addLink = function (a_link) {
         this.links.push(a_link);
+    };
+    NodeEntity.prototype.registerGraphics = function (container) {
+        container.addChild(this.graphic);
+        this.resources.forEach(function (element) {
+            element.registerGraphics(container);
+        });
     };
     return NodeEntity;
 }(Drawable));

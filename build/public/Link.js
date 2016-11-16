@@ -9,8 +9,8 @@ var Link = (function (_super) {
         var shape = new PIXI.Graphics();
         shape.x = 0;
         shape.y = 0;
-        Utils.drawLine(shape, a_nodeA.graphic.x, a_nodeA.graphic.y, a_nodeB.graphic.x, a_nodeB.graphic.y, 4, 0x000000);
-        Utils.drawLine(shape, a_nodeA.graphic.x, a_nodeA.graphic.y, a_nodeB.graphic.x, a_nodeB.graphic.y, 2, 0xffffff);
+        Utils.drawLine(shape, a_nodeA.graphic.x, a_nodeA.graphic.y, a_nodeB.graphic.x, a_nodeB.graphic.y, 10, Colors.grassOuterPath);
+        Utils.drawLine(shape, a_nodeA.graphic.x, a_nodeA.graphic.y, a_nodeB.graphic.x, a_nodeB.graphic.y, 5, Colors.grassInnerPath);
         shape.zIndex = 1;
         shape.interactive = false;
         _super.call(this, shape);
