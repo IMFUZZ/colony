@@ -17,6 +17,8 @@ function setup() {
 		"autoResize" : true
 	});
 	interactionManager = new PIXI.interaction.InteractionManager(renderer);
+	interactionManager.mouse.link = new Link(null, null);
+	
 
 	//Add the canvas to the HTML document
 	document.body.appendChild(renderer.view);
@@ -63,7 +65,6 @@ rectangle.y = 170;
 stage.addChild(rectangle);
 */
 function update() {
-	console.log("updating..");
 	graph.render(renderer);
 	requestAnimationFrame(update);
 }

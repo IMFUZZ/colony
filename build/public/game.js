@@ -14,6 +14,7 @@ function setup() {
         "autoResize": true
     });
     interactionManager = new PIXI.interaction.InteractionManager(renderer);
+    interactionManager.mouse.link = new Link(null, null);
     document.body.appendChild(renderer.view);
     renderer.backgroundColor = 0xe0e0e0;
 }
@@ -27,7 +28,6 @@ graph.createTwoWayLink(graph.nodes[0], graph.nodes[1]);
 graph.createTwoWayLink(graph.nodes[1], graph.nodes[2]);
 graph.createTwoWayLink(graph.nodes[0], graph.nodes[2]);
 function update() {
-    console.log("updating..");
     graph.render(renderer);
     requestAnimationFrame(update);
 }
