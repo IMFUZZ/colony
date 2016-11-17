@@ -1,5 +1,3 @@
-
-
 class Drawable {
 	graphic: PIXI.Graphics;
 	

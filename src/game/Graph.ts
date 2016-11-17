@@ -12,7 +12,7 @@ class Graph {
 	
 	addNode(a_node: NodeEntity) {
 		this.nodes.push(a_node);
-		this.container.addChild(a_node.graphic);
+		a_node.registerGraphics(this.container);
 		Utils.updateLayersOrder(this.container);
 	}
 
