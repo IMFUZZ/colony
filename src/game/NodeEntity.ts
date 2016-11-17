@@ -2,6 +2,7 @@
 
 class NodeEntity extends Drawable {
 	links: Link[];
+	owner: number;
 	
 	constructor(a_x:number, a_y:number) {
 		var shape = new PIXI.Graphics();
@@ -17,9 +18,14 @@ class NodeEntity extends Drawable {
 		shape.zIndex = 2;
 		super(shape);
 		this.links = [];
+		this.owner = Player.NONE;
 	}
 
 	addLink(a_link:Link) {
 		this.links.push(a_link);
+	}
+
+	belongsTo(a_player: Player): boolean {
+		return a_player.isOwnerOf(this);
 	}
 }
