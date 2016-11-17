@@ -1,38 +1,44 @@
+var WIDTH = 800;
+var HEIGHT = 600;
 var colors;
-var interactionManager;
+var inputManager;
 var renderer;
+var stage;
+function setStage() {
+    stage = new PIXI.Container();
+    stage.hitArea = new PIXI.Rectangle(0, 0, WIDTH, HEIGHT);
+    stage.interactive = true;
+    stage.on('mousedown', function () {
+        inputManager.mouse.link.reset();
+    });
+}
 function setup() {
-    colors = {
-        "a": 0x2A363B,
-        "b": 0xE84A5F,
-        "c": 0xFF847C,
-        "d": 0xFECEA8,
-        "e": 0x99B898
-    };
-    renderer = PIXI.autoDetectRenderer(800, 600, {
+    renderer = PIXI.autoDetectRenderer(WIDTH, HEIGHT, {
         "antialias": true,
         "autoResize": true
     });
-    interactionManager = new PIXI.interaction.InteractionManager(renderer);
-    interactionManager.mouse.link = new Link(null, null);
+    inputManager = new InputManager(renderer.plugins.interaction);
     document.body.appendChild(renderer.view);
     renderer.backgroundColor = 0xe0e0e0;
+    setStage();
+    var graph = new Graph([
+        new NodeEntity(100, 100),
+        new NodeEntity(400, 400),
+        new NodeEntity(250, 500)
+    ]);
+    graph.createTwoWayLinks([
+        [graph.nodes[0], graph.nodes[1]],
+        [graph.nodes[1], graph.nodes[2]],
+        [graph.nodes[0], graph.nodes[2]]
+    ]);
+    stage.addChild(graph.container);
+    graph.container.addChild(inputManager.mouse.link.graphic);
 }
 ;
-var graph = new Graph([
-    new NodeEntity(100, 100),
-    new NodeEntity(400, 400),
-    new NodeEntity(250, 500)
-]);
-graph.createTwoWayLink(graph.nodes[0], graph.nodes[1]);
-graph.createTwoWayLink(graph.nodes[1], graph.nodes[2]);
-graph.createTwoWayLink(graph.nodes[0], graph.nodes[2]);
 function update() {
-    var mousePos = interactionManager.mouse.global;
-    interactionManager.mouse.link.redraw(mousePos.x, mousePos.y, mousePos.x, mousePos.y, 5);
-    graph.render(renderer);
+    inputManager.update();
+    renderer.render(stage);
     requestAnimationFrame(update);
 }
 setup();
-graph.container.addChild(interactionManager.mouse.link.graphic);
 update();

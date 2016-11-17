@@ -28,6 +28,12 @@ class Graph {
 		this.createOneWayLink(a_nodeB, a_nodeA);
 	}
 
+	createTwoWayLinks(nodeCouples : any[]) {
+		nodeCouples.forEach((nodeCouple) => {
+			this.createTwoWayLink(nodeCouple[0], nodeCouple[1]);
+		});
+	}
+
 	render(renderer : PIXI.CanvasRenderer | PIXI.WebGLRenderer)
 	{
 		renderer.render(this.container);

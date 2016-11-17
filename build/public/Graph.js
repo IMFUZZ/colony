@@ -22,6 +22,12 @@ var Graph = (function () {
         this.createOneWayLink(a_nodeA, a_nodeB);
         this.createOneWayLink(a_nodeB, a_nodeA);
     };
+    Graph.prototype.createTwoWayLinks = function (nodeCouples) {
+        var _this = this;
+        nodeCouples.forEach(function (nodeCouple) {
+            _this.createTwoWayLink(nodeCouple[0], nodeCouple[1]);
+        });
+    };
     Graph.prototype.render = function (renderer) {
         renderer.render(this.container);
     };

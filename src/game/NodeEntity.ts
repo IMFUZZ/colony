@@ -4,27 +4,38 @@ class NodeEntity extends Drawable {
 	links: Link[];
 	
 	constructor(a_x:number, a_y:number) {
-		var shape = new PIXI.Graphics();
-		shape.interactive = true;
-		shape.x = a_x;
-		shape.y = a_y;
-		shape.beginFill(0x00000);
-		shape.drawCircle(0,0,15);
-		shape.endFill();
-		shape.beginFill(0x487fd6);
-		shape.drawCircle(0, 0, 13);
-		shape.endFill();
-		shape.zIndex = 2;
-		super(shape);
+		super();
+		super.draw({
+			x: a_x,
+			y: a_y,
+			interactive: false,
+			zIndex: 1,
+			color: 0x000000,
+			lineWidth: 4
+		});
+		this.graphic.interactive = true;
+		this.graphic.beginFill(0x00000);
+		this.graphic.drawCircle(0,0,15);
+		this.graphic.endFill();
+		this.graphic.beginFill(0x487fd6);
+		this.graphic.drawCircle(0, 0, 13);
+		this.graphic.endFill();
+		this.graphic.zIndex = 2;
 		this.links = [];
 
-		shape.on("mousedown", (e) => {
-			interactionManager.mouse.link.nodeA = this;
-		});
-
-		shape.on("mouseup", (e) => {
-			interactionManager.mouse.link.nodeB = this;
-			interactionManager.mouse.link.reset();
+		this.graphic.on("mousedown", (e) => {
+			e.stopPropagation();
+			console.log("node mousedown");
+			var nodeA = inputManager.mouse.link.nodeA;
+			var nodeB = inputManager.mouse.link.nodeB;
+			if (nodeA && nodeB) {
+				inputManager.mouse.link.reset();
+			}
+			if (!nodeA) {
+				inputManager.mouse.link.nodeA = this;
+			} else {
+				inputManager.mouse.link.nodeB = this;
+			}
 		});
 	}
 
