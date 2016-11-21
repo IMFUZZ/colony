@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var NodeEntity = (function (_super) {
     __extends(NodeEntity, _super);
-    function NodeEntity(a_x, a_y) {
+    function NodeEntity(a_x, a_y, resources) {
         var _this = this;
         _super.call(this);
         _super.prototype.draw.call(this, {
@@ -25,6 +25,10 @@ var NodeEntity = (function (_super) {
         this.graphic.endFill();
         this.graphic.zIndex = 2;
         this.links = [];
+        this.resources = resources || [];
+        this.resources.forEach(function (element) {
+            element.start();
+        });
         this.graphic.on("mousedown", function (e) {
             e.stopPropagation();
             console.log("node mousedown");
@@ -43,6 +47,12 @@ var NodeEntity = (function (_super) {
     }
     NodeEntity.prototype.addLink = function (a_link) {
         this.links.push(a_link);
+    };
+    NodeEntity.prototype.registerGraphics = function (container) {
+        container.addChild(this.graphic);
+        this.resources.forEach(function (element) {
+            element.registerGraphics(container);
+        });
     };
     return NodeEntity;
 }(Drawable));

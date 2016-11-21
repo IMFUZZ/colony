@@ -2,9 +2,8 @@
 
 class NodeEntity extends Drawable {
 	links: Link[];
-<<<<<<< HEAD
-	
-	constructor(a_x:number, a_y:number) {
+	resources: Resource[];
+	constructor(a_x:number, a_y:number, resources?: Resource[]) {
 		super();
 		super.draw({
 			x: a_x,
@@ -23,7 +22,10 @@ class NodeEntity extends Drawable {
 		this.graphic.endFill();
 		this.graphic.zIndex = 2;
 		this.links = [];
-
+		this.resources = resources || [];
+		this.resources.forEach(element => {
+			element.start();
+		})
 		this.graphic.on("mousedown", (e) => {
 			e.stopPropagation();
 			console.log("node mousedown");
@@ -38,28 +40,6 @@ class NodeEntity extends Drawable {
 				inputManager.mouse.link.nodeB = this;
 			}
 		});
-=======
-	resources: Resource[];
-
-	constructor(a_x:number, a_y:number, resources?: Resource[]) {
-		var shape = new PIXI.Graphics();
-		shape.x = a_x;
-		shape.y = a_y;
-		shape.beginFill(0x00000);
-		shape.drawCircle(0,0,15);
-		shape.endFill();
-		shape.beginFill(0x487fd6); // CHANGE THIS
-		shape.drawCircle(0, 0, 13);
-		shape.endFill();
-		shape.interactive = true;
-		shape.zIndex = 2;
-		super(shape);
-		this.links = [];
-		this.resources = resources || [];
-		this.resources.forEach(element => {
-			element.start();
-		})
->>>>>>> 4ce1bd2ca1d1faf389f34aaffc75c25a3efc4ae7
 	}
 
 	addLink(a_link:Link) {

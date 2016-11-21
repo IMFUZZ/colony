@@ -22,7 +22,7 @@ function setup() {
     renderer.backgroundColor = 0xe0e0e0;
     setStage();
     var graph = new Graph([
-        new NodeEntity(100, 100),
+        new NodeEntity(100, 100, [new Resource("test", 100, 0.01, 0, 50, 100)]),
         new NodeEntity(400, 400),
         new NodeEntity(250, 500)
     ]);
