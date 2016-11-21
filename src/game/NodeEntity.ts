@@ -2,6 +2,7 @@
 
 class NodeEntity extends Drawable {
 	links: Link[];
+	owner: number;
 	resources: Resource[];
 	constructor(a_x:number, a_y:number, resources?: Resource[]) {
 		super();
@@ -22,6 +23,7 @@ class NodeEntity extends Drawable {
 		this.graphic.endFill();
 		this.graphic.zIndex = 2;
 		this.links = [];
+		this.owner = Player.NONE;
 		this.resources = resources || [];
 		this.resources.forEach(element => {
 			element.start();
@@ -45,7 +47,7 @@ class NodeEntity extends Drawable {
 	addLink(a_link:Link) {
 		this.links.push(a_link);
 	}
-
+	
 	/*addResource(a_resource: Resource)
 	{
 		this.resources.push(a_resource);
@@ -59,5 +61,8 @@ class NodeEntity extends Drawable {
 	    this.resources.forEach(element => {
 			element.registerGraphics(container);
 		});
+	}
+	belongsTo(a_player: Player): boolean {
+		return a_player.isOwnerOf(this);
 	}
 }
