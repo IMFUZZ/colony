@@ -8,7 +8,7 @@ var Resource = (function () {
             fontFamily: 'Arial',
             fontWeight: 'Bold',
             fontSize: 12,
-            fill: 0x000000,
+            fill: 0xffffff,
             align: 'center'
         });
         this.text.x = x || 0;

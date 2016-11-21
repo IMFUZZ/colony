@@ -25,7 +25,7 @@ function setup() {
 
 	//Add the canvas to the HTML document
 	document.body.appendChild(renderer.view);
-	renderer.backgroundColor = 0xe0e0e0;
+	renderer.backgroundColor = Colors.grass;
 	setStage();
 	var graph = new Graph([
 		new NodeEntity(100, 100, [new Resource("test", 100, 0.01, 0, 50, 100)]),
@@ -37,10 +37,10 @@ function setup() {
 		[graph.nodes[1], graph.nodes[2]],
 		[graph.nodes[0], graph.nodes[2]]
 	]);
-
 	stage.addChild(graph.container);
 	graph.container.addChild(inputManager.mouse.link.graphic);
 };
+
 function update() {
 	inputManager.update();
 	renderer.render(stage);

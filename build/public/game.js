@@ -19,7 +19,7 @@ function setup() {
     });
     inputManager = new InputManager(renderer.plugins.interaction);
     document.body.appendChild(renderer.view);
-    renderer.backgroundColor = 0xe0e0e0;
+    renderer.backgroundColor = Colors.grass;
     setStage();
     var graph = new Graph([
         new NodeEntity(100, 100, [new Resource("test", 100, 0.01, 0, 50, 100)]),

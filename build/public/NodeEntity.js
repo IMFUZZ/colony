@@ -25,6 +25,7 @@ var NodeEntity = (function (_super) {
         this.graphic.endFill();
         this.graphic.zIndex = 2;
         this.links = [];
+        this.owner = Player.NONE;
         this.resources = resources || [];
         this.resources.forEach(function (element) {
             element.start();
@@ -53,6 +54,9 @@ var NodeEntity = (function (_super) {
         this.resources.forEach(function (element) {
             element.registerGraphics(container);
         });
+    };
+    NodeEntity.prototype.belongsTo = function (a_player) {
+        return a_player.isOwnerOf(this);
     };
     return NodeEntity;
 }(Drawable));

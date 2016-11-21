@@ -18,7 +18,7 @@ var Link = (function (_super) {
             y2: 0,
             interactive: false,
             zIndex: 1,
-            color: 0x000000,
+            color: Colors.grassInnerPath,
             lineWidth: 4
         });
     }

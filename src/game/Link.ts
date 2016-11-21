@@ -13,12 +13,11 @@ class Link extends Drawable {
 				y2: 0,
 				interactive: false,
 				zIndex: 1,
-				color: 0x000000,
+				color: Colors.grassInnerPath,
 				lineWidth: 4
 			}
 		);
 	}
-
 	public draw(config) {
 		super.draw(config);
 		this.graphic.clear();

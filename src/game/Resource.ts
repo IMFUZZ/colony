@@ -7,10 +7,10 @@ class Resource
     constructor(public name:string, public amount: number, public growthRatio: number, public staticIncrease: number, x? : number, y? : number)
     {
         this.text = new PIXI.Text(amount.toString(),{
-            fontFamily : 'Arial', 
+            fontFamily : 'Arial',
             fontWeight : 'Bold',
-            fontSize: 12, 
-            fill : 0x000000, 
+            fontSize: 12,
+            fill : 0xffffff,
             align : 'center',
         });
         this.text.x = x || 0;
