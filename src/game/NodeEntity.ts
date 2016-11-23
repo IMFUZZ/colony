@@ -40,6 +40,7 @@ class NodeEntity extends Drawable {
 				inputManager.mouse.link.nodeA = this;
 			} else {
 				inputManager.mouse.link.nodeB = this;
+				this.graphic.x;
 			}
 		});
 	}
@@ -47,11 +48,11 @@ class NodeEntity extends Drawable {
 	addLink(a_link:Link) {
 		this.links.push(a_link);
 	}
-	
+
 	/*addResource(a_resource: Resource)
 	{
 		this.resources.push(a_resource);
-		Trouver un moyen de le faire mais on a besoin d'avoir accces au container de graph 
+		Trouver un moyen de le faire mais on a besoin d'avoir accces au container de graph
 		alors peut-etre passer par le graph pour ajouter des ressources
 	}*/
 

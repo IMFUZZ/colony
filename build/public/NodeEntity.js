@@ -43,6 +43,7 @@ var NodeEntity = (function (_super) {
             }
             else {
                 inputManager.mouse.link.nodeB = _this;
+                _this.graphic.x;
             }
         });
     }
