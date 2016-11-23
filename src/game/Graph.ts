@@ -16,6 +16,13 @@ class Graph {
 		Utils.updateLayersOrder(this.container);
 	}
 
+	getNodeById(nodeId: number) {
+		for (let x of this.nodes) {
+			if (x.id == nodeId) return x;
+		}
+		return null;
+	}
+
 	createOneWayLink(a_nodeA:NodeEntity, a_nodeB:NodeEntity) {
 		var link = new Link(a_nodeA, a_nodeB);
 		a_nodeA.addLink(link);
