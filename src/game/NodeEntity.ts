@@ -1,9 +1,11 @@
 ///<reference path="Drawable.ts"/>
 
 class NodeEntity extends Drawable {
+	id: number;
 	links: Link[];
 	owner: number;
 	resources: Resource[];
+	
 	constructor(a_x:number, a_y:number, resources?: Resource[]) {
 		super();
 		super.draw({
