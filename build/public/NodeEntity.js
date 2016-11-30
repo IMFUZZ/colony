@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var NodeEntity = (function (_super) {
     __extends(NodeEntity, _super);
-    function NodeEntity(a_x, a_y, resources) {
+    function NodeEntity(a_x, a_y, resources, id) {
         var _this = this;
         _super.call(this);
         _super.prototype.draw.call(this, {
@@ -24,6 +24,7 @@ var NodeEntity = (function (_super) {
         this.graphic.drawCircle(0, 0, 13);
         this.graphic.endFill();
         this.graphic.zIndex = 2;
+        this.id = id || ++NodeEntity.count;
         this.links = [];
         this.owner = Player.NONE;
         this.resources = resources || [];
@@ -58,5 +59,6 @@ var NodeEntity = (function (_super) {
     NodeEntity.prototype.belongsTo = function (a_player) {
         return a_player.isOwnerOf(this);
     };
+    NodeEntity.count = 0;
     return NodeEntity;
 }(Drawable));
