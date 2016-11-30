@@ -4,6 +4,7 @@ class NodeEntity extends Drawable {
 	links: Link[];
 	owner: number;
 	resources: Resource[];
+	radius: number;
 	constructor(a_x:number, a_y:number, resources?: Resource[]) {
 		super();
 		super.draw({
@@ -14,12 +15,13 @@ class NodeEntity extends Drawable {
 			color: 0x000000,
 			lineWidth: 4
 		});
+		this.radius = 7.5;
 		this.graphic.interactive = true;
 		this.graphic.beginFill(0x00000);
-		this.graphic.drawCircle(0,0,15);
+		this.graphic.drawCircle(0,0,this.radius*2);
 		this.graphic.endFill();
 		this.graphic.beginFill(0x487fd6);
-		this.graphic.drawCircle(0, 0, 13);
+		this.graphic.drawCircle(0, 0, (this.radius*2)-2);
 		this.graphic.endFill();
 		this.graphic.zIndex = 2;
 		this.links = [];
@@ -28,7 +30,15 @@ class NodeEntity extends Drawable {
 		this.resources.forEach(element => {
 			element.start();
 		})
+		this.graphic.on("rightdown", (e) => {
+				ContextMenu.showAtNode(this);
+		})
+
 		this.graphic.on("mousedown", (e) => {
+			/*if(e.data.originalEvent.which === 3 || e.data.originalEvent.button === 2) {
+				ContextMenu.showAtNode(this);
+				return false;
+			}*/
 			e.stopPropagation();
 			console.log("node mousedown");
 			var nodeA = inputManager.mouse.link.nodeA;

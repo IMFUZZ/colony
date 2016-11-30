@@ -16,12 +16,13 @@ var NodeEntity = (function (_super) {
             color: 0x000000,
             lineWidth: 4
         });
+        this.radius = 7.5;
         this.graphic.interactive = true;
         this.graphic.beginFill(0x00000);
-        this.graphic.drawCircle(0, 0, 15);
+        this.graphic.drawCircle(0, 0, this.radius * 2);
         this.graphic.endFill();
         this.graphic.beginFill(0x487fd6);
-        this.graphic.drawCircle(0, 0, 13);
+        this.graphic.drawCircle(0, 0, (this.radius * 2) - 2);
         this.graphic.endFill();
         this.graphic.zIndex = 2;
         this.links = [];
@@ -29,6 +30,9 @@ var NodeEntity = (function (_super) {
         this.resources = resources || [];
         this.resources.forEach(function (element) {
             element.start();
+        });
+        this.graphic.on("rightdown", function (e) {
+            ContextMenu.showAtNode(_this);
         });
         this.graphic.on("mousedown", function (e) {
             e.stopPropagation();

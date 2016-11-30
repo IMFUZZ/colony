@@ -29,7 +29,12 @@ function setup() {
 	var graph = new Graph([
 		new NodeEntity(100, 100, [new Resource("test", 100, 0.01, 0, 50, 100)]),
 		new NodeEntity(400,400),
-		new NodeEntity(250,500)
+		new NodeEntity(250,500),
+		new NodeEntity(100,23),
+		new NodeEntity(200,90),
+		new NodeEntity(300,150),
+		new NodeEntity(400,300),
+		new NodeEntity(200,10)
 	]);
 	graph.createTwoWayLinks([
 		[graph.nodes[0], graph.nodes[1]],
