@@ -2,8 +2,8 @@ class Player {
 
   readonly id: number;
 
-  constructor() {
-    this.id = Math.pow(2, Player.count);
+  constructor(id? : number) {
+    this.id = (id == undefined) ? Math.pow(2, Player.count) : id;
     Player.count += 1;
   }
 

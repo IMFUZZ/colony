@@ -1,0 +1,34 @@
+{
+	"graphs" : [
+		{
+			"nodes" : [
+				{
+					"id" : 13516843168,
+					"x" : 0,
+					"y" : 0,
+					"resources" : [
+						{
+							"name" : "food",
+							"amount" : 100,
+							"growthRatio" : 0.1,
+							"staticIncrease" : 10
+						}
+					]
+				}
+			],
+			"links" : [
+				{
+					"nodeA" : 1231321,
+					"nodeB" : 123213,
+					"transferts" : []
+				}
+			],
+			"players" : [
+				{
+					"id" : 1,
+					"nodes" : [1,2,3,4,5]
+				}
+			]
+		}
+	]
+}

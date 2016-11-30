@@ -12,7 +12,7 @@ class InputManager {
 	}
 
 	update() {
-		inputManager.mouse.link.draw({
+		(this.mouse as any).link.draw({
 			x1: this.mouse.global.x, 
 			y1: this.mouse.global.y, 
 			x2: this.mouse.global.x, 

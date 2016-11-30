@@ -2,7 +2,7 @@
 class Graph {
 	container:PIXI.Container;
 	nodes:NodeEntity[];
-	constructor(a_nodes: NodeEntity[]) {
+	constructor(a_nodes?: NodeEntity[]) {
 		this.container = new PIXI.Container();
 		this.nodes = [];
 		a_nodes.forEach((node)=>{

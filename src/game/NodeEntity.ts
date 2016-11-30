@@ -31,15 +31,15 @@ class NodeEntity extends Drawable {
 		this.graphic.on("mousedown", (e) => {
 			e.stopPropagation();
 			console.log("node mousedown");
-			var nodeA = inputManager.mouse.link.nodeA;
-			var nodeB = inputManager.mouse.link.nodeB;
+			var nodeA = game.inputManager.mouse.link.nodeA;
+			var nodeB = game.inputManager.mouse.link.nodeB;
 			if (nodeA && nodeB) {
-				inputManager.mouse.link.reset();
+				game.inputManager.mouse.link.reset();
 			}
 			if (!nodeA) {
-				inputManager.mouse.link.nodeA = this;
+				game.inputManager.mouse.link.nodeA = this;
 			} else {
-				inputManager.mouse.link.nodeB = this;
+				game.inputManager.mouse.link.nodeB = this;
 			}
 		});
 	}

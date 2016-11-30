@@ -6,7 +6,7 @@ var InputManager = (function () {
         this.mouse.link = new Link(null, null);
     }
     InputManager.prototype.update = function () {
-        inputManager.mouse.link.draw({
+        this.mouse.link.draw({
             x1: this.mouse.global.x,
             y1: this.mouse.global.y,
             x2: this.mouse.global.x,

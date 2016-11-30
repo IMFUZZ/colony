@@ -4,6 +4,20 @@ var colors;
 var inputManager;
 var renderer;
 var stage;
+function loadSave(saveID, cb) {
+    var request = new XMLHttpRequest();
+    request.open('GET', '/load/' + saveID, true);
+    request.onload = function () {
+        if (!(this.status >= 200 && this.status < 400)) {
+            throw new Error("Could not load the save #" + saveID + " | STATUS : " + this.status);
+        }
+        cb(this.response);
+    };
+    request.onerror = function () {
+        throw new Error("Could not load the save #" + saveID + "| REQUEST FAILED");
+    };
+    request.send();
+}
 function setStage() {
     stage = new PIXI.Container();
     stage.hitArea = new PIXI.Rectangle(0, 0, WIDTH, HEIGHT);
@@ -12,7 +26,7 @@ function setStage() {
         inputManager.mouse.link.reset();
     });
 }
-function setup() {
+function setup(data) {
     renderer = PIXI.autoDetectRenderer(WIDTH, HEIGHT, {
         "antialias": true,
         "autoResize": true
@@ -33,6 +47,7 @@ function setup() {
     ]);
     stage.addChild(graph.container);
     graph.container.addChild(inputManager.mouse.link.graphic);
+    update();
 }
 ;
 function update() {
@@ -40,5 +55,4 @@ function update() {
     renderer.render(stage);
     requestAnimationFrame(update);
 }
-setup();
-update();
+loadSave(1, setup);
