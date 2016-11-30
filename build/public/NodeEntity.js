@@ -38,11 +38,20 @@ var NodeEntity = (function (_super) {
             if (nodeA && nodeB) {
                 inputManager.mouse.link.reset();
             }
-            if (!nodeA) {
+            else if (!nodeA) {
                 inputManager.mouse.link.nodeA = _this;
             }
             else {
                 inputManager.mouse.link.nodeB = _this;
+                var link_1 = null;
+                inputManager.mouse.link.nodeA.links.forEach(function (e) {
+                    if (e.nodeA == inputManager.mouse.link.nodeA && e.nodeB == inputManager.mouse.link.nodeB) {
+                        link_1 = e;
+                    }
+                });
+                if (link_1) {
+                    link_1.addTransfer();
+                }
             }
         });
     }
@@ -57,6 +66,13 @@ var NodeEntity = (function (_super) {
     };
     NodeEntity.prototype.belongsTo = function (a_player) {
         return a_player.isOwnerOf(this);
+    };
+    NodeEntity.prototype.extract = function (amount) {
+        this.resources[0].amount -= amount;
+        return amount;
+    };
+    NodeEntity.prototype.insert = function (ex) {
+        this.resources[0].amount += ex;
     };
     return NodeEntity;
 }(Drawable));

@@ -25,6 +25,7 @@ class Resource
         // Exemple of how to stop the interval
         // clearInterval(this.interval);
     }
+    
     private update(self : Resource){
         return function()
         {

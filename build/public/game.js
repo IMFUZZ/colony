@@ -23,8 +23,8 @@ function setup() {
     setStage();
     var graph = new Graph([
         new NodeEntity(100, 100, [new Resource("test", 100, 0.01, 0, 50, 100)]),
-        new NodeEntity(400, 400),
-        new NodeEntity(250, 500)
+        new NodeEntity(400, 400, [new Resource("test", 100, 0.01, 0, 350, 400)]),
+        new NodeEntity(250, 500, [new Resource("test", 100, 0.01, 0, 200, 500)])
     ]);
     graph.createTwoWayLinks([
         [graph.nodes[0], graph.nodes[1]],

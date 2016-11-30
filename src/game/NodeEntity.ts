@@ -1,9 +1,11 @@
 ///<reference path="Drawable.ts"/>
+///<reference path='Transfer.ts'/>
 
 class NodeEntity extends Drawable {
 	links: Link[];
 	owner: number;
 	resources: Resource[];
+	
 	constructor(a_x:number, a_y:number, resources?: Resource[]) {
 		super();
 		super.draw({
@@ -35,11 +37,19 @@ class NodeEntity extends Drawable {
 			var nodeB = inputManager.mouse.link.nodeB;
 			if (nodeA && nodeB) {
 				inputManager.mouse.link.reset();
-			}
-			if (!nodeA) {
+			}else if (!nodeA) {
 				inputManager.mouse.link.nodeA = this;
 			} else {
 				inputManager.mouse.link.nodeB = this;
+				let link = null;
+				inputManager.mouse.link.nodeA.links.forEach((e) => {
+					if(e.nodeA == inputManager.mouse.link.nodeA && e.nodeB == inputManager.mouse.link.nodeB){
+						link = e;
+					}
+				});
+				if (link) {
+					link.addTransfer();
+				}
 			}
 		});
 	}
@@ -65,4 +75,13 @@ class NodeEntity extends Drawable {
 	belongsTo(a_player: Player): boolean {
 		return a_player.isOwnerOf(this);
 	}
+
+	extract(amount: number) {
+		this.resources[0].amount -= amount;
+		return amount;
+	}
+
+    insert(ex: number) {
+        this.resources[0].amount += ex;
+    }
 }
