@@ -12,6 +12,14 @@ var Graph = (function () {
         a_node.registerGraphics(this.container);
         Utils.updateLayersOrder(this.container);
     };
+    Graph.prototype.getNodeById = function (nodeId) {
+        for (var _i = 0, _a = this.nodes; _i < _a.length; _i++) {
+            var x = _a[_i];
+            if (x.id == nodeId)
+                return x;
+        }
+        return null;
+    };
     Graph.prototype.createOneWayLink = function (a_nodeA, a_nodeB) {
         var link = new Link(a_nodeA, a_nodeB);
         a_nodeA.addLink(link);

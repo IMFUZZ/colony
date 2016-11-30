@@ -10,7 +10,7 @@ function setup() {
     game = new Game({}, renderer);
     document.body.appendChild(renderer.view);
     renderer.backgroundColor = Colors.grass;
-    game.start();
+    game.start(1000);
 }
 ;
 setup();
