@@ -13,7 +13,7 @@ function setup() {
 	//Add the canvas to the HTML document
 	document.body.appendChild(renderer.view);
 	renderer.backgroundColor = Colors.grass;
-	game.start(1000);
+	game.start(1000/60);
 };
 
 setup();

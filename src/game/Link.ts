@@ -37,4 +37,12 @@ class Link extends Drawable {
 		this.nodeA = null;
 		this.nodeB = null;
 	}
+
+	public toData() {
+		return {
+			"nodeA": this.nodeA.id,
+			"nodeB": this.nodeB.id,
+			"transferts": [] // TODO foreach transfert.toData()
+		};
+	}
 }

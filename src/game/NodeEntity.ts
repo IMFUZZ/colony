@@ -62,7 +62,7 @@ class NodeEntity extends Drawable {
 	{
 		this.resources.push(a_resource);
 		Trouver un moyen de le faire mais on a besoin d'avoir accces au container de graph 
-		alors peut-etre passer par le graph pour ajouter des ressources
+		alors peut-etre passer par le graph pour ajouter des resources
 	}*/
 
 	registerGraphics(container : PIXI.Container)
@@ -74,5 +74,15 @@ class NodeEntity extends Drawable {
 	}
 	belongsTo(a_player: Player): boolean {
 		return a_player.isOwnerOf(this);
+	}
+
+	/* Retourne une représentation sérialisable du node */
+	toData() {
+		return {
+			"id": this.id,
+			"x": this.x,
+			"y": this.y,
+			"resources": undefined // TODO foreach resource.toData()
+		};
 	}
 }

@@ -45,4 +45,20 @@ class Graph {
 	{
 		renderer.render(this.container);
 	}
+
+	toData() {
+		var graphData = {
+			"nodes": [],
+			"links": []
+		};
+		
+		for (var node of this.nodes) {
+			graphData.nodes.push(node.toData());
+			for (var link of node.links) {
+				graphData.links.push(link.toData());
+			}
+		}
+
+		return graphData;
+	}
 }

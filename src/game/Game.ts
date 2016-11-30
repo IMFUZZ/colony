@@ -1,4 +1,4 @@
-
+	
 
 class Game {
 	animationId: number;
@@ -6,7 +6,8 @@ class Game {
 	stage: PIXI.Container;
 	graphs: Graph[];
 	players: Player[];
-	private playIntervalId; // ******* DJDUBE
+	private updateIntervalId;
+	private drawIntervalId;
 	renderer: PIXI.CanvasRenderer;
 
 	constructor(config, renderer:PIXI.CanvasRenderer) {
@@ -20,6 +21,8 @@ class Game {
 		this.stage.on('mousedown', () => {
 			(this.inputManager.mouse as any).link.reset();
 		});
+		this.updateIntervalId = null;
+		this.drawIntervalId = null;
 
 		this.load({
 			"graphs" : [
@@ -72,23 +75,26 @@ class Game {
 	}
 
 	start(interval: number) {
-		this.playIntervalId = setInterval(() => {
+		this.updateIntervalId = setInterval(() => {
 			return this.update();
 		}, interval);
-	}	
+	}
 
 	pause() {
-		if (this.animationId != undefined) {
-			cancelAnimationFrame(this.animationId);
-			this.animationId = undefined;
+		if (this.updateIntervalId != null) {
+			clearInterval(this.updateIntervalId);
+			this.updateIntervalId = null;
+		}
+		if (this.animationId != null) {
+			cancelAnimationFrame(this.drawIntervalId);
+			this.drawIntervalId = null;
 		}
 	}
 
 	update() {
 		this.inputManager.update();
-		this.draw();
 		this.animationId = requestAnimationFrame(() => {
-			this.update();
+			this.draw();
 		});
 	}
 
@@ -100,10 +106,10 @@ class Game {
 		for (var graphData of saveData.graphs) {
 			var graph = new Graph([]);
 			for (var nodeData of graphData.nodes) {
-				graph.addNode(new NodeEntity(nodeData.x, nodeData.y));	
+				graph.addNode(new NodeEntity(nodeData.x, nodeData.y, [], nodeData.id));	
 			}
 			for (var linkData of graphData.links) {
-				graph.createOneWayLink(graph.getNodeById(linkData.nodeAId), graph.getNodeById(linkData.nodeBId))
+				graph.createOneWayLink(graph.getNodeById(linkData.nodeA), graph.getNodeById(linkData.nodeB))
 			}
 			for (var playerData of graphData.players) {
 				this.players.push(new Player(playerData.id));
@@ -111,6 +117,20 @@ class Game {
 			graph.container.addChild((this.inputManager.mouse as any).link.graphic);
 			this.stage.addChild(graph.container);
 			this.graphs.push(graph);
+		}
+	}
+
+	save() {
+		var saveData = {
+			"graphs": [],
+			"players": []
+		};
+
+		for (var graph of this.graphs) {
+			saveData.graphs.push(graph.toData());
+		}
+		for (var player of this.players) {
+			saveData.players.push(undefined); // TODO unifier player et graph
 		}
 	}
 
