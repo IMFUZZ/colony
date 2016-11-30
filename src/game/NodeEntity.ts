@@ -1,12 +1,14 @@
 ///<reference path="Drawable.ts"/>
 
 class NodeEntity extends Drawable {
-	id: number;
+	readonly id: number;
 	links: Link[];
 	owner: number;
 	resources: Resource[];
-	
-	constructor(a_x:number, a_y:number, resources?: Resource[]) {
+
+	private static count:number = 0;
+
+	constructor(a_x:number, a_y:number, resources?: Resource[], id?: number) {
 		super();
 		super.draw({
 			x: a_x,
@@ -24,12 +26,18 @@ class NodeEntity extends Drawable {
 		this.graphic.drawCircle(0, 0, 13);
 		this.graphic.endFill();
 		this.graphic.zIndex = 2;
+
+		this.id = id || ++NodeEntity.count;
+
 		this.links = [];
+
 		this.owner = Player.NONE;
+
 		this.resources = resources || [];
 		this.resources.forEach(element => {
 			element.start();
 		})
+
 		this.graphic.on("mousedown", (e) => {
 			e.stopPropagation();
 			console.log("node mousedown");
