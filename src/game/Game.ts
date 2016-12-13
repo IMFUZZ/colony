@@ -1,13 +1,10 @@
-	
-
 class Game {
-	animationId: number;
 	inputManager: InputManager;
 	stage: PIXI.Container;
 	graphs: Graph[];
 	players: Player[];
 	private updateIntervalId;
-	private drawIntervalId;
+	private animationRequestId;
 	renderer: PIXI.CanvasRenderer;
 	contextMenu: ContextMenu;
 
@@ -23,7 +20,7 @@ class Game {
 			(this.inputManager.mouse as any).link.reset();
 		});
 		this.updateIntervalId = null;
-		this.drawIntervalId = null;
+		this.animationRequestId = null;
 		this.contextMenu = new ContextMenu(".context-menu");
 		this.load({
 			"graphs" : [
@@ -86,9 +83,9 @@ class Game {
 			clearInterval(this.updateIntervalId);
 			this.updateIntervalId = null;
 		}
-		if (this.animationId != null) {
-			cancelAnimationFrame(this.drawIntervalId);
-			this.drawIntervalId = null;
+		if (this.animationRequestId != null) {
+			cancelAnimationFrame(this.animationRequestId);
+			this.animationRequestId = null;
 		}
 	}
 
@@ -97,7 +94,7 @@ class Game {
 		for (var graph of this.graphs) {
 			graph.update();	
 		}
-		this.animationId = requestAnimationFrame(() => {
+		this.animationRequestId = requestAnimationFrame(() => {
 			this.draw();
 		});
 	}
