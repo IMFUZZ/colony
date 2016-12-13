@@ -39,5 +39,20 @@ var Graph = (function () {
     Graph.prototype.render = function (renderer) {
         renderer.render(this.container);
     };
+    Graph.prototype.toData = function () {
+        var graphData = {
+            "nodes": [],
+            "links": []
+        };
+        for (var _i = 0, _a = this.nodes; _i < _a.length; _i++) {
+            var node = _a[_i];
+            graphData.nodes.push(node.toData());
+            for (var _b = 0, _c = node.links; _b < _c.length; _b++) {
+                var link = _c[_b];
+                graphData.links.push(link.toData());
+            }
+        }
+        return graphData;
+    };
     return Graph;
 }());

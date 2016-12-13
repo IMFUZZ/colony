@@ -32,5 +32,12 @@ var Link = (function (_super) {
         this.nodeA = null;
         this.nodeB = null;
     };
+    Link.prototype.toData = function () {
+        return {
+            "nodeA": this.nodeA.id,
+            "nodeB": this.nodeB.id,
+            "transferts": []
+        };
+    };
     return Link;
 }(Drawable));

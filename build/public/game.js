@@ -4,20 +4,6 @@ var colors;
 var inputManager;
 var renderer;
 var stage;
-function loadSave(saveID, cb) {
-    var request = new XMLHttpRequest();
-    request.open('GET', '/load/' + saveID, true);
-    request.onload = function () {
-        if (!(this.status >= 200 && this.status < 400)) {
-            throw new Error("Could not load the save #" + saveID + " | STATUS : " + this.status);
-        }
-        cb(this.response);
-    };
-    request.onerror = function () {
-        throw new Error("Could not load the save #" + saveID + "| REQUEST FAILED");
-    };
-    request.send();
-}
 function setStage() {
     stage = new PIXI.Container();
     stage.hitArea = new PIXI.Rectangle(0, 0, WIDTH, HEIGHT);
@@ -26,7 +12,7 @@ function setStage() {
         inputManager.mouse.link.reset();
     });
 }
-function setup(data) {
+function setup() {
     renderer = PIXI.autoDetectRenderer(WIDTH, HEIGHT, {
         "antialias": true,
         "autoResize": true
@@ -38,7 +24,12 @@ function setup(data) {
     var graph = new Graph([
         new NodeEntity(100, 100, [new Resource("test", 100, 0.01, 0, 50, 100)]),
         new NodeEntity(400, 400),
-        new NodeEntity(250, 500)
+        new NodeEntity(250, 500),
+        new NodeEntity(100, 23),
+        new NodeEntity(200, 90),
+        new NodeEntity(300, 150),
+        new NodeEntity(400, 300),
+        new NodeEntity(200, 10)
     ]);
     graph.createTwoWayLinks([
         [graph.nodes[0], graph.nodes[1]],
@@ -47,7 +38,6 @@ function setup(data) {
     ]);
     stage.addChild(graph.container);
     graph.container.addChild(inputManager.mouse.link.graphic);
-    update();
 }
 ;
 function update() {
@@ -55,4 +45,5 @@ function update() {
     renderer.render(stage);
     requestAnimationFrame(update);
 }
-loadSave(1, setup);
+setup();
+update();

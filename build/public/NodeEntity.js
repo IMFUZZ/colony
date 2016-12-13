@@ -16,12 +16,13 @@ var NodeEntity = (function (_super) {
             color: 0x000000,
             lineWidth: 4
         });
+        this.radius = 7.5;
         this.graphic.interactive = true;
         this.graphic.beginFill(0x00000);
-        this.graphic.drawCircle(0, 0, 15);
+        this.graphic.drawCircle(0, 0, this.radius * 2);
         this.graphic.endFill();
         this.graphic.beginFill(0x487fd6);
-        this.graphic.drawCircle(0, 0, 13);
+        this.graphic.drawCircle(0, 0, (this.radius * 2) - 2);
         this.graphic.endFill();
         this.graphic.zIndex = 2;
         this.id = id || ++NodeEntity.count;
@@ -58,6 +59,14 @@ var NodeEntity = (function (_super) {
     };
     NodeEntity.prototype.belongsTo = function (a_player) {
         return a_player.isOwnerOf(this);
+    };
+    NodeEntity.prototype.toData = function () {
+        return {
+            "id": this.id,
+            "x": this.graphic.x,
+            "y": this.graphic.y,
+            "resources": undefined
+        };
     };
     NodeEntity.count = 0;
     return NodeEntity;
