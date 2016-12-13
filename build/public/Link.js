@@ -36,7 +36,7 @@ var Link = (function (_super) {
         Utils.drawLine(this.graphic, (this.nodeA) ? this.nodeA.graphic.x : config.x1, (this.nodeA) ? this.nodeA.graphic.y : config.y1, (this.nodeB) ? this.nodeB.graphic.x : config.x2, (this.nodeB) ? this.nodeB.graphic.y : config.y2, config.lineWidth, config.color);
     };
     Link.prototype.addTransfer = function () {
-        this.transferts.push(new Transfert(this, 0.01, 0));
+        this.transferts.push(new Transfert(this, 0.01, 0, "gold"));
     };
     Link.prototype.reset = function () {
         this.nodeA = null;

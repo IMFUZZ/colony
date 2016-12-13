@@ -43,7 +43,7 @@ class Link extends Drawable {
 	}
 
 	public addTransfer() {
-		this.transferts.push(new Transfert(this, 0.01, 0));
+		this.transferts.push(new Transfert(this, 0.01, 0, "gold"));
 	}
 
 	public reset() {

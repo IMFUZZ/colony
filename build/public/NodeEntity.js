@@ -8,6 +8,7 @@ var NodeEntity = (function (_super) {
     function NodeEntity(a_x, a_y, resources, id) {
         var _this = this;
         _super.call(this);
+        this.resourcesType = ["gold", "food", "population"];
         this.id = id || ++NodeEntity.count;
         _super.prototype.draw.call(this, {
             x: a_x,
@@ -28,7 +29,9 @@ var NodeEntity = (function (_super) {
         this.graphic.zIndex = 2;
         this.links = [];
         this.owner = Player.NONE;
-        this.resources = resources || [];
+        this.resources = { "gold": new Resource("gold", 100, 0.001, 0.001, a_x, a_y),
+            "food": new Resource("food", 100, 0.001, 0.001, a_x, a_y + 15),
+            "population": new Resource("population", 100, 0.001, 0.001, a_x, a_y + 30) };
         this.graphic.on("mousedown", function (e) {
             e.stopPropagation();
             console.log("node mousedown");
@@ -59,19 +62,18 @@ var NodeEntity = (function (_super) {
             var link = _a[_i];
             link.update();
         }
-        for (var _b = 0, _c = this.resources; _b < _c.length; _b++) {
-            var resource = _c[_b];
-            resource.update();
-        }
+        this.resources["gold"].update();
+        this.resources["food"].update();
+        this.resources["population"].update();
     };
     NodeEntity.prototype.addLink = function (a_link) {
         this.links.push(a_link);
     };
     NodeEntity.prototype.registerGraphics = function (container) {
         container.addChild(this.graphic);
-        this.resources.forEach(function (element) {
-            element.registerGraphics(container);
-        });
+        for (var i = 0; i < this.resourcesType.length; ++i) {
+            this.resources[this.resourcesType[i]].registerGraphics(container);
+        }
     };
     NodeEntity.prototype.belongsTo = function (a_player) {
         return a_player.isOwnerOf(this);
@@ -84,12 +86,12 @@ var NodeEntity = (function (_super) {
             "resources": undefined
         };
     };
-    NodeEntity.prototype.extract = function (amount) {
-        this.resources[0].amount -= amount;
+    NodeEntity.prototype.extract = function (amount, type) {
+        this.resources[type].amount -= amount;
         return amount;
     };
-    NodeEntity.prototype.insert = function (ex) {
-        this.resources[0].amount += ex;
+    NodeEntity.prototype.insert = function (ex, type) {
+        this.resources[type].amount += ex;
     };
     NodeEntity.count = 0;
     return NodeEntity;

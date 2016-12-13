@@ -18,7 +18,7 @@ var Resource = (function () {
     Resource.prototype.update = function () {
         this.amount += this.growthRatio * this.amount;
         this.amount += this.staticIncrease;
-        this.text.text = Math.round(this.amount).toString();
+        this.text.text = this.name + " : " + Math.round(this.amount).toString();
     };
     Resource.prototype.registerGraphics = function (container) {
         container.addChild(this.text);

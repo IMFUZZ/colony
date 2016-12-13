@@ -1,11 +1,14 @@
 ///<reference path="Drawable.ts"/>
 ///<reference path='Transfert.ts'/>
 
+
+
 class NodeEntity extends Drawable {
+	resources : {[resourceType : string] : Resource;};
+	resourcesType : string[] = ["gold", "food", "population"];
 	readonly id: number;
 	links: Link[];
 	owner: number;
-	resources: Resource[];
 	private static count:number = 0;
 	radius: number;
 	constructor(a_x:number, a_y:number, resources?: Resource[], id?: number) {
@@ -19,6 +22,7 @@ class NodeEntity extends Drawable {
 			color: 0x000000,
 			lineWidth: 4
 		});
+		
 		this.radius = 7.5;
 		this.graphic.interactive = true;
 		this.graphic.beginFill(0x00000);
@@ -30,7 +34,10 @@ class NodeEntity extends Drawable {
 		this.graphic.zIndex = 2;
 		this.links = [];
 		this.owner = Player.NONE;
-		this.resources = resources || [];
+		
+		this.resources = {"gold" : new Resource("gold", 100, 0.001, 0.001, a_x, a_y), 
+				"food" : new Resource("food", 100, 0.001, 0.001, a_x, a_y + 15), 
+				"population" : new Resource("population", 100, 0.001, 0.001, a_x, a_y + 30)};
 		this.graphic.on("mousedown", (e) => {
 			/*if(e.data.originalEvent.which === 3 || e.data.originalEvent.button === 2) {
 				ContextMenu.showAtNode(this);
@@ -64,10 +71,9 @@ class NodeEntity extends Drawable {
 		for (var link of this.links) {
 			link.update();	
 		}
-
-		for (var resource of this.resources) {
-			resource.update();	
-		}
+		this.resources["gold"].update();
+		this.resources["food"].update();
+		this.resources["population"].update();
 	}
 
 	addLink(a_link:Link) {
@@ -77,9 +83,9 @@ class NodeEntity extends Drawable {
 	registerGraphics(container : PIXI.Container)
 	{
 		container.addChild(this.graphic);
-	    this.resources.forEach(element => {
-			element.registerGraphics(container);
-		});
+		for (var i: number = 0; i < this.resourcesType.length ; ++i){
+			this.resources[this.resourcesType[i]].registerGraphics(container);
+		}
 	}
 
 	belongsTo(a_player: Player): boolean {
@@ -96,12 +102,12 @@ class NodeEntity extends Drawable {
 		};
 	}
 
-	extract(amount: number) {
-		this.resources[0].amount -= amount;
+	extract(amount: number, type : string) {
+		this.resources[type].amount -= amount;
 		return amount;
 	}
 
-    insert(ex: number) {
-        this.resources[0].amount += ex;
+    insert(ex: number, type : string) {
+        this.resources[type].amount += ex;
     }
 }

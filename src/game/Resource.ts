@@ -18,7 +18,7 @@ class Resource
     update() {
         this.amount += this.growthRatio * this.amount;
         this.amount += this.staticIncrease;
-        this.text.text = Math.round(this.amount).toString();            
+        this.text.text = this.name + " : " +  Math.round(this.amount).toString();            
     }
 
     registerGraphics(container: PIXI.Container)
