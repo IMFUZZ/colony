@@ -94,6 +94,9 @@ class Game {
 
 	update() {
 		this.inputManager.update();
+		for (var graph of this.graphs) {
+			graph.update();	
+		}
 		this.animationId = requestAnimationFrame(() => {
 			this.draw();
 		});
