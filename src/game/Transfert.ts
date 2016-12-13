@@ -5,9 +5,9 @@ class Transfert {
     }
 
     update() {
-        let amount = this.lk.nodeA.resources[0].amount;
+        /*let amount = this.lk.nodeA.resources[0].amount;
         let amountToExtract = amount * this.growthRatio + this.staticIncrease;
         this.lk.nodeA.extract(amountToExtract);
-        this.lk.nodeB.insert(amountToExtract);
+        this.lk.nodeB.insert(amountToExtract);*/
     }
 }

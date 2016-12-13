@@ -67,7 +67,8 @@ class Game {
 					"players" : [
 						{
 							"id" : 1,
-							"nodes" : [1,2,3,4,5]
+							"color" : 0x0000ff,
+							"nodes" : [1]
 						}
 					]
 				}
@@ -110,13 +111,22 @@ class Game {
 		for (var graphData of saveData.graphs) {
 			var graph = new Graph([]);
 			for (var nodeData of graphData.nodes) {
-				graph.addNode(new NodeEntity(nodeData.x, nodeData.y, [], nodeData.id));	
+				graph.addNode(new NodeEntity(nodeData.x, nodeData.y, [], {
+					id : nodeData.id
+				}));	
 			}
 			for (var linkData of graphData.links) {
 				graph.createOneWayLink(graph.getNodeById(linkData.nodeA), graph.getNodeById(linkData.nodeB))
 			}
 			for (var playerData of graphData.players) {
-				this.players.push(new Player(playerData.id));
+				let player = new Player(playerData.color, playerData.id);
+				for (var nodeId of playerData.nodes) {
+					var node = graph.getNodeById(nodeId);
+					if (node) {
+						node.setOwner(player);
+					}
+				}
+				this.players.push(player);
 			}
 			graph.container.addChild((this.inputManager.mouse as any).link.graphic);
 			this.stage.addChild(graph.container);

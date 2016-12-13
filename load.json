@@ -26,18 +26,8 @@
 	"players" : [
 		{
 			"id" : 1,
+			"color" : 0x0000FF,
 			"nodes" : [1,2,3,4,5]
 		}
 	]
 }
-
-TODO :
-	Things to handle: 
-		1) liste des nodes
-			1.1) le data des nodes (position, etc..)
-		2) liste des links
-		3) les informations d'un player (list des nodes)
-
-	Things to change :
-		1) changer Resource pour être généré à partir de données pur seulement	
-		2) 
