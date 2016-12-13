@@ -1,8 +1,10 @@
 ///<reference path="Drawable.ts"/>
-
+///<reference path="Transfert.ts"/>
 class Link extends Drawable {
+	transferts: Transfert[];
 	constructor(public nodeA: NodeEntity, public nodeB: NodeEntity) {
 		super();	
+		this.transferts = [];
 		this.draw(
 			{
 				x: 0,
@@ -18,6 +20,13 @@ class Link extends Drawable {
 			}
 		);
 	}
+
+	update() {
+		for (var transfert of this.transferts) {
+			transfert.update();	
+		}
+	}
+
 	public draw(config) {
 		super.draw(config);
 		this.graphic.clear();
@@ -31,6 +40,10 @@ class Link extends Drawable {
 			config.lineWidth, 
 			config.color
 		);
+	}
+
+	public addTransfer() {
+		this.transferts.push(new Transfert(this, 0.01, 0));
 	}
 
 	public reset() {

@@ -10,6 +10,12 @@ class Graph {
 		});
 	}
 	
+	update() {
+		for (var node of this.nodes) {
+			node.update();	
+		}
+	}
+
 	addNode(a_node: NodeEntity) {
 		this.nodes.push(a_node);
 		a_node.registerGraphics(this.container);

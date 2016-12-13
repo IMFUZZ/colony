@@ -1,4 +1,5 @@
 ///<reference path="Drawable.ts"/>
+///<reference path='Transfert.ts'/>
 
 class NodeEntity extends Drawable {
 	readonly id: number;
@@ -9,6 +10,7 @@ class NodeEntity extends Drawable {
 	radius: number;
 	constructor(a_x:number, a_y:number, resources?: Resource[], id?: number) {
 		super();
+		this.id = id || ++NodeEntity.count;
 		super.draw({
 			x: a_x,
 			y: a_y,
@@ -26,17 +28,9 @@ class NodeEntity extends Drawable {
 		this.graphic.drawCircle(0, 0, (this.radius*2)-2);
 		this.graphic.endFill();
 		this.graphic.zIndex = 2;
-
-		this.id = id || ++NodeEntity.count;
-
 		this.links = [];
-
 		this.owner = Player.NONE;
-
 		this.resources = resources || [];
-		this.resources.forEach(element => {
-			element.start();
-		})
 		this.graphic.on("mousedown", (e) => {
 			/*if(e.data.originalEvent.which === 3 || e.data.originalEvent.button === 2) {
 				ContextMenu.showAtNode(this);
@@ -48,13 +42,32 @@ class NodeEntity extends Drawable {
 			var nodeB = game.inputManager.mouse.link.nodeB;
 			if (nodeA && nodeB) {
 				game.inputManager.mouse.link.reset();
-			}
-			if (!nodeA) {
+			} else if (!nodeA) {
 				game.inputManager.mouse.link.nodeA = this;
 			} else {
 				game.inputManager.mouse.link.nodeB = this;
+				let link = null;
+				game.inputManager.mouse.link.nodeA.links.forEach((e) => {
+					if(e.nodeA == game.inputManager.mouse.link.nodeA && e.nodeB == game.inputManager.mouse.link.nodeB){
+						link = e;
+					}
+				});
+				if (link) {
+					// Ajout un context menu et faire dequoi - Guillaume 2016
+					link.addTransfer(); 
+				}
 			}
 		});
+	}
+
+	update() {
+		for (var link of this.links) {
+			link.update();	
+		}
+
+		for (var resource of this.resources) {
+			resource.update();	
+		}
 	}
 
 	addLink(a_link:Link) {
@@ -82,4 +95,13 @@ class NodeEntity extends Drawable {
 			"resources": undefined // TODO foreach resource.toData()
 		};
 	}
+
+	extract(amount: number) {
+		this.resources[0].amount -= amount;
+		return amount;
+	}
+
+    insert(ex: number) {
+        this.resources[0].amount += ex;
+    }
 }

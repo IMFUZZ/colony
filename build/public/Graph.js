@@ -7,6 +7,12 @@ var Graph = (function () {
             _this.addNode(node);
         });
     }
+    Graph.prototype.update = function () {
+        for (var _i = 0, _a = this.nodes; _i < _a.length; _i++) {
+            var node = _a[_i];
+            node.update();
+        }
+    };
     Graph.prototype.addNode = function (a_node) {
         this.nodes.push(a_node);
         a_node.registerGraphics(this.container);

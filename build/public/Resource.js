@@ -14,17 +14,11 @@ var Resource = (function () {
         this.text.x = x || 0;
         this.text.y = y || 0;
         this.text.zIndex = 15;
-        this.updateInterval = 500;
     }
-    Resource.prototype.start = function () {
-        this.interval = setInterval(this.update(this), this.updateInterval);
-    };
-    Resource.prototype.update = function (self) {
-        return function () {
-            self.amount += self.growthRatio * self.amount;
-            self.amount += self.staticIncrease;
-            self.text.text = Math.round(self.amount).toString();
-        };
+    Resource.prototype.update = function () {
+        this.amount += this.growthRatio * this.amount;
+        this.amount += this.staticIncrease;
+        this.text.text = Math.round(this.amount).toString();
     };
     Resource.prototype.registerGraphics = function (container) {
         container.addChild(this.text);

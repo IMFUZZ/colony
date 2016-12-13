@@ -8,6 +8,7 @@ var NodeEntity = (function (_super) {
     function NodeEntity(a_x, a_y, resources, id) {
         var _this = this;
         _super.call(this);
+        this.id = id || ++NodeEntity.count;
         _super.prototype.draw.call(this, {
             x: a_x,
             y: a_y,
@@ -25,13 +26,9 @@ var NodeEntity = (function (_super) {
         this.graphic.drawCircle(0, 0, (this.radius * 2) - 2);
         this.graphic.endFill();
         this.graphic.zIndex = 2;
-        this.id = id || ++NodeEntity.count;
         this.links = [];
         this.owner = Player.NONE;
         this.resources = resources || [];
-        this.resources.forEach(function (element) {
-            element.start();
-        });
         this.graphic.on("mousedown", function (e) {
             e.stopPropagation();
             console.log("node mousedown");
@@ -40,14 +37,33 @@ var NodeEntity = (function (_super) {
             if (nodeA && nodeB) {
                 game.inputManager.mouse.link.reset();
             }
-            if (!nodeA) {
+            else if (!nodeA) {
                 game.inputManager.mouse.link.nodeA = _this;
             }
             else {
                 game.inputManager.mouse.link.nodeB = _this;
+                var link_1 = null;
+                game.inputManager.mouse.link.nodeA.links.forEach(function (e) {
+                    if (e.nodeA == game.inputManager.mouse.link.nodeA && e.nodeB == game.inputManager.mouse.link.nodeB) {
+                        link_1 = e;
+                    }
+                });
+                if (link_1) {
+                    link_1.addTransfer();
+                }
             }
         });
     }
+    NodeEntity.prototype.update = function () {
+        for (var _i = 0, _a = this.links; _i < _a.length; _i++) {
+            var link = _a[_i];
+            link.update();
+        }
+        for (var _b = 0, _c = this.resources; _b < _c.length; _b++) {
+            var resource = _c[_b];
+            resource.update();
+        }
+    };
     NodeEntity.prototype.addLink = function (a_link) {
         this.links.push(a_link);
     };
@@ -67,6 +83,13 @@ var NodeEntity = (function (_super) {
             "y": this.graphic.y,
             "resources": undefined
         };
+    };
+    NodeEntity.prototype.extract = function (amount) {
+        this.resources[0].amount -= amount;
+        return amount;
+    };
+    NodeEntity.prototype.insert = function (ex) {
+        this.resources[0].amount += ex;
     };
     NodeEntity.count = 0;
     return NodeEntity;

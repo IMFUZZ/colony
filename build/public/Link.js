@@ -9,6 +9,7 @@ var Link = (function (_super) {
         _super.call(this);
         this.nodeA = nodeA;
         this.nodeB = nodeB;
+        this.transferts = [];
         this.draw({
             x: 0,
             y: 0,
@@ -22,11 +23,20 @@ var Link = (function (_super) {
             lineWidth: 4
         });
     }
+    Link.prototype.update = function () {
+        for (var _i = 0, _a = this.transferts; _i < _a.length; _i++) {
+            var transfert = _a[_i];
+            transfert.update();
+        }
+    };
     Link.prototype.draw = function (config) {
         _super.prototype.draw.call(this, config);
         this.graphic.clear();
         this.graphic.zIndex = config.zIndex;
         Utils.drawLine(this.graphic, (this.nodeA) ? this.nodeA.graphic.x : config.x1, (this.nodeA) ? this.nodeA.graphic.y : config.y1, (this.nodeB) ? this.nodeB.graphic.x : config.x2, (this.nodeB) ? this.nodeB.graphic.y : config.y2, config.lineWidth, config.color);
+    };
+    Link.prototype.addTransfer = function () {
+        this.transferts.push(new Transfert(this, 0.01, 0));
     };
     Link.prototype.reset = function () {
         this.nodeA = null;
