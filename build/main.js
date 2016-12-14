@@ -5,6 +5,9 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/home.html');
 });
+app.get('/test', function (req, res) {
+    res.sendFile(__dirname + '/public/UnitTest/unitTest.html');
+});
 app.get('/load/:id', function (req, res) {
     var filePath = '/public/saves/save_' + req.params.id + '.json';
     console.log('Loading : ' + filePath + ' ...');
