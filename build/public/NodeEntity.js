@@ -6,7 +6,6 @@ var __extends = (this && this.__extends) || function (d, b) {
 var NodeEntity = (function (_super) {
     __extends(NodeEntity, _super);
     function NodeEntity(x, y, resources, config) {
-        var _this = this;
         _super.call(this);
         config = config || {};
         this.id = config.id || ++NodeEntity.count;
@@ -15,9 +14,15 @@ var NodeEntity = (function (_super) {
         this.links = [];
         this.owner = config.ownerId || Player.NONE;
         this.resources = resources || [];
+        this.registerClicks();
+    }
+    NodeEntity.prototype.registerClicks = function () {
+        var _this = this;
+        this.graphic.on("rightdown", function (e) {
+            game.menuFactory.SpawnMenuAtNode(_this, MenuType.OwnedNode);
+        });
         this.graphic.on("mousedown", function (e) {
             e.stopPropagation();
-            console.log("node mousedown");
             var nodeA = game.inputManager.mouse.link.nodeA;
             var nodeB = game.inputManager.mouse.link.nodeB;
             if (nodeA && nodeB) {
@@ -39,7 +44,7 @@ var NodeEntity = (function (_super) {
                 }
             }
         });
-    }
+    };
     NodeEntity.prototype.update = function () {
         for (var _i = 0, _a = this.links; _i < _a.length; _i++) {
             var link = _a[_i];
