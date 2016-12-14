@@ -62,9 +62,9 @@ var NodeEntity = (function (_super) {
             var link = _a[_i];
             link.update();
         }
-        this.resources["gold"].update();
-        this.resources["food"].update();
-        this.resources["population"].update();
+        for (var i = 0; i < this.resourcesType.length; ++i) {
+            this.resources[this.resourcesType[i]].update();
+        }
     };
     NodeEntity.prototype.addLink = function (a_link) {
         this.links.push(a_link);

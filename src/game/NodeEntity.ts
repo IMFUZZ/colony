@@ -71,9 +71,9 @@ class NodeEntity extends Drawable {
 		for (var link of this.links) {
 			link.update();	
 		}
-		this.resources["gold"].update();
-		this.resources["food"].update();
-		this.resources["population"].update();
+		for (var i: number = 0; i < this.resourcesType.length; ++i) {
+			this.resources[this.resourcesType[i]].update();
+		}
 	}
 
 	addLink(a_link:Link) {

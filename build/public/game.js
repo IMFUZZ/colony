@@ -12,7 +12,7 @@ var Game = (function () {
             _this.inputManager.mouse.link.reset();
         });
         this.updateIntervalId = null;
-        this.drawIntervalId = null;
+        this.animationRequestId = null;
         this.contextMenu = new ContextMenu(".context-menu");
         this.load({
             "graphs": [
@@ -73,9 +73,9 @@ var Game = (function () {
             clearInterval(this.updateIntervalId);
             this.updateIntervalId = null;
         }
-        if (this.animationId != null) {
-            cancelAnimationFrame(this.drawIntervalId);
-            this.drawIntervalId = null;
+        if (this.animationRequestId != null) {
+            cancelAnimationFrame(this.animationRequestId);
+            this.animationRequestId = null;
         }
     };
     Game.prototype.update = function () {
@@ -85,7 +85,7 @@ var Game = (function () {
             var graph = _a[_i];
             graph.update();
         }
-        this.animationId = requestAnimationFrame(function () {
+        this.animationRequestId = requestAnimationFrame(function () {
             _this.draw();
         });
     };

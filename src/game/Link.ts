@@ -44,6 +44,8 @@ class Link extends Drawable {
 
 	public addTransfer() {
 		this.transferts.push(new Transfert(this, 0.01, 0, "gold"));
+		this.transferts.push(new Transfert(this, 0.01, 0, "food"));
+		this.transferts.push(new Transfert(this, 0.01, 0, "population"));
 	}
 
 	public reset() {

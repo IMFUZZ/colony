@@ -37,6 +37,8 @@ var Link = (function (_super) {
     };
     Link.prototype.addTransfer = function () {
         this.transferts.push(new Transfert(this, 0.01, 0, "gold"));
+        this.transferts.push(new Transfert(this, 0.01, 0, "food"));
+        this.transferts.push(new Transfert(this, 0.01, 0, "population"));
     };
     Link.prototype.reset = function () {
         this.nodeA = null;

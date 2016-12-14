@@ -1,7 +1,7 @@
 class Transfert {
     
     constructor(public lk: Link, public growthRatio: number, public staticIncrease: number, public resourceType : string) {
-       
+        
     }
 
     update() {
