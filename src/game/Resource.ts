@@ -13,6 +13,7 @@ class Resource
         this.text.x = x || 0;
         this.text.y = y || 0;
         this.text.zIndex = 15;
+
     }
 
     update() {

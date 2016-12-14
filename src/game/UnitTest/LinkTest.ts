@@ -9,7 +9,7 @@ class LinkTest extends UnitTest {
         let link = new Link(null,null);
         super.assertTrue(link.transferts.length == 0);
         link.addTransfer();
-        super.assertTrue(link.transferts.length == 1);
+        super.assertTrue(link.transferts.length == 3);
     }
 
     testConstructor()
