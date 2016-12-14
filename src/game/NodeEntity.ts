@@ -8,43 +8,32 @@ class NodeEntity extends Drawable {
 	resourcesType : string[] = ["gold", "food", "population"];
 	readonly id: number;
 	links: Link[];
-	owner: number;
+	private owner: number;
 	private static count:number = 0;
 	radius: number;
-	constructor(a_x:number, a_y:number, resources?: Resource[], id?: number) {
+	color : number;
+	constructor(x:number, y:number, resources?: Resource[], config?) {
 		super();
-		this.id = id || ++NodeEntity.count;
-		super.draw({
-			x: a_x,
-			y: a_y,
-			interactive: false,
-			zIndex: 1,
-			color: 0x000000,
-			lineWidth: 4
-		});
-		
-		this.radius = 7.5;
-		this.graphic.interactive = true;
-		this.graphic.beginFill(0x00000);
-		this.graphic.drawCircle(0,0,this.radius*2);
-		this.graphic.endFill();
-		this.graphic.beginFill(0x487fd6);
-		this.graphic.drawCircle(0, 0, (this.radius*2)-2);
-		this.graphic.endFill();
-		this.graphic.zIndex = 2;
+		this.resources = {"gold" : new Resource("gold", 100, 0.001, 0.001, x, y), 
+				"food" : new Resource("food", 100, 0.001, 0.001, x, y + 15), 
+				"population" : new Resource("population", 100, 0.001, 0.001, x, y + 30)};
+		config = config || {};
+		this.id = config.id || ++NodeEntity.count;
+		this.color = 0xFFFFFF;
+		this.redraw(x, y);
 		this.links = [];
-		this.owner = Player.NONE;
-		
-		this.resources = {"gold" : new Resource("gold", 100, 0.001, 0.001, a_x, a_y), 
-				"food" : new Resource("food", 100, 0.001, 0.001, a_x, a_y + 15), 
-				"population" : new Resource("population", 100, 0.001, 0.001, a_x, a_y + 30)};
+		this.owner = config.ownerId || Player.NONE;
+		this.registerClicks();
+	}
+
+	registerClicks() {
+		this.graphic.on("rightdown", (e) => {
+			game.menuFactory.SpawnMenuAtNode(this, MenuType.OwnedNode); 
+			// game.contextMenu.showAtNode(this);
+		})
 		this.graphic.on("mousedown", (e) => {
-			/*if(e.data.originalEvent.which === 3 || e.data.originalEvent.button === 2) {
-				ContextMenu.showAtNode(this);
-				return false;
-			}*/
 			e.stopPropagation();
-			console.log("node mousedown");
+			// console.log("node mousedown");
 			var nodeA = game.inputManager.mouse.link.nodeA;
 			var nodeB = game.inputManager.mouse.link.nodeB;
 			if (nodeA && nodeB) {
@@ -53,6 +42,7 @@ class NodeEntity extends Drawable {
 				game.inputManager.mouse.link.nodeA = this;
 			} else {
 				game.inputManager.mouse.link.nodeB = this;
+
 				let link = null;
 				game.inputManager.mouse.link.nodeA.links.forEach((e) => {
 					if(e.nodeA == game.inputManager.mouse.link.nodeA && e.nodeB == game.inputManager.mouse.link.nodeB){
@@ -109,5 +99,36 @@ class NodeEntity extends Drawable {
 
     insert(ex: number, type : string) {
         this.resources[type].amount += ex;
+    }
+
+    redraw(x:number, y:number) {
+    	super.draw({
+			x: x,
+			y: y,
+			interactive: false,
+			zIndex: 1,
+			color: 0x000000,
+			lineWidth: 4
+		});
+        this.radius = 7.5;
+		this.graphic.interactive = true;
+		this.graphic.beginFill(0x00000);
+		this.graphic.drawCircle(0,0,this.radius*2);
+		this.graphic.endFill();
+		// This is the inside color of the node
+		this.graphic.beginFill(this.color);
+		this.graphic.drawCircle(0, 0, (this.radius*2)-2);
+		this.graphic.endFill();
+		this.graphic.zIndex = 2;
+    }
+
+    setOwner(player: Player) {
+        this.owner = player.id;
+        this.color = player.color;
+        this.redraw(this.graphic.x, this.graphic.y); 
+    }
+
+    getOwner() {
+        return this.owner; 
     }
 }
