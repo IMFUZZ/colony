@@ -18,13 +18,17 @@ class NodeEntity extends Drawable {
 		this.links = [];
 		this.owner = config.ownerId || Player.NONE;
 		this.resources = resources || [];
+		this.registerClicks();
+	}
+
+	registerClicks() {
+		this.graphic.on("rightdown", (e) => {
+			game.menuFactory.SpawnMenuAtNode(this, MenuType.OwnedNode); 
+			// game.contextMenu.showAtNode(this);
+		})
 		this.graphic.on("mousedown", (e) => {
-			/*if(e.data.originalEvent.which === 3 || e.data.originalEvent.button === 2) {
-				ContextMenu.showAtNode(this);
-				return false;
-			}*/
 			e.stopPropagation();
-			console.log("node mousedown");
+			// console.log("node mousedown");
 			var nodeA = game.inputManager.mouse.link.nodeA;
 			var nodeB = game.inputManager.mouse.link.nodeB;
 			if (nodeA && nodeB) {
@@ -33,6 +37,7 @@ class NodeEntity extends Drawable {
 				game.inputManager.mouse.link.nodeA = this;
 			} else {
 				game.inputManager.mouse.link.nodeB = this;
+
 				let link = null;
 				game.inputManager.mouse.link.nodeA.links.forEach((e) => {
 					if(e.nodeA == game.inputManager.mouse.link.nodeA && e.nodeB == game.inputManager.mouse.link.nodeB){

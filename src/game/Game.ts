@@ -10,6 +10,7 @@ class Game {
 	private drawIntervalId;
 	renderer: PIXI.CanvasRenderer;
 	contextMenu: ContextMenu;
+	menuFactory: MenuFactory;
 
 	constructor(config, renderer:PIXI.CanvasRenderer) {
 		this.players = [];
@@ -25,6 +26,7 @@ class Game {
 		this.updateIntervalId = null;
 		this.drawIntervalId = null;
 		this.contextMenu = new ContextMenu(".context-menu");
+		this.menuFactory = new MenuFactory();
 		this.load({
 			"graphs" : [
 				{
