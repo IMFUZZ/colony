@@ -4,22 +4,26 @@ class MenuFactory {
         switch(type)
         {
             case MenuType.OwnedNode:
-                game.contextMenu.addItems(
-                    [
-                        { 
-                            name: "OwnedNode",
-                            isSubMenu : false,
-                            execute : function()
-                            {
-                                alert("Allo");
-                            }
-                        }
-                    ]
-                );
+                this.FillOwnedNodeMenuAtNode(node)
             break;
             default:
             break;
         }
         game.contextMenu.showAtNode(node);
+    }
+
+    FillOwnedNodeMenuAtNode(node : NodeEntity)
+    {
+        game.contextMenu.addItems(
+            [
+                { 
+                    name: "OwnedNode",
+                    isSubMenu : false,
+                    execute : function() {
+                        alert("Allo");
+                    }
+                }
+            ]
+        );
     }
 }
