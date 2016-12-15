@@ -1,9 +1,10 @@
 class Player {
 
   readonly id: number;
-  
-  constructor(public color: number, id?: number,) {
-    this.id = (id == undefined) ? Math.pow(2, Player.count) : id;
+
+  // attention: un id doit etre une puissance de 2
+  constructor(public color: number, id = 0) {
+    this.id = id || Math.pow(2, Player.count);
     Player.count += 1;
   }
 

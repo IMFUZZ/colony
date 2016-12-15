@@ -17,7 +17,7 @@ class NodeTest extends UnitTest {
     testBelongsTo()
     {
         let color = 0xffffff
-        let player = new Player(color,22);
+        let player = new Player(color);
         let node = new NodeEntity(10,10);
         super.assertTrue(!node.belongsTo(player));
         node.setOwner(player);
@@ -38,8 +38,8 @@ class NodeTest extends UnitTest {
         super.assertTrue(node.resources["food"].amount == 150);
         super.assertTrue(node.resources["population"].amount == 400);
     }
-    
-    testExtract() 
+
+    testExtract()
     {
         let node = new NodeEntity(10,10);
         super.assertTrue(node.resources["gold"].amount == 100);
@@ -51,7 +51,7 @@ class NodeTest extends UnitTest {
         super.assertTrue(node.resources["gold"].amount == 90);
         super.assertTrue(node.resources["food"].amount == 85);
         super.assertTrue(node.resources["population"].amount == 80);
-        
+
     }
 }
 

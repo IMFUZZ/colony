@@ -58,9 +58,7 @@ class Game {
 					"links" : [
 						{
 							"nodeA" : 1,
-							"nodeB" : 2,
-							"transferts*****" : [
-							]
+							"nodeB" : 2
 						}
 					],
 					"players" : [
@@ -95,7 +93,7 @@ class Game {
 	update() {
 		this.inputManager.update();
 		for (var graph of this.graphs) {
-			graph.update();	
+			graph.update();
 		}
 		this.animationRequestId = requestAnimationFrame(() => {
 			this.draw();
@@ -112,7 +110,7 @@ class Game {
 			for (var nodeData of graphData.nodes) {
 				graph.addNode(new NodeEntity(nodeData.x, nodeData.y, [], {
 					id : nodeData.id
-				}));	
+				}));
 			}
 			for (var linkData of graphData.links) {
 				graph.createOneWayLink(graph.getNodeById(linkData.nodeA), graph.getNodeById(linkData.nodeB))
